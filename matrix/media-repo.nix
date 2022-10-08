@@ -39,11 +39,11 @@ in
               type = "s3";
               opts = {
                 tempPath = "";
-                endpoint = "s3.us-west-004.backblazeb2.com";
+                endpoint = "storage.de.cloud.ovh.net/v1/AUTH_64c351d16d1f4731973b63256f2ac8cc";
                 accessKeyId = "$ACCESS_KEY_ID";
                 accessSecret = "$ACCESS_SECRET";
                 ssl = true;
-                bucketName = "nyrina-media";
+                bucketName = "chat";
               };
             }
           ];

@@ -1,12 +1,7 @@
 keys:
-  - &admin_ash age1v70aynt7atg63awsn4g0338qyn4c4zh52fz4dyx7qjvxkffsfdtqn8teyw
-  - &admin_anbl age154udm4wmr2wjyfys3hzh9hafrlwyj33s7uyu82uynvg95qqvk3jsa826ex
-  - &server_xenia age16pwtle0l655vznt3nutu8wx2weq6kfwp4k80qpcrcq9uy98yz9esj3j9ky
-
+  - &admin_luxus age1ncepfcrzfep624tpanhqfflafznh7ftuqffv0nfq24jhv3dwx40sltjkad
 creation_rules:
   - path_regex: secrets/.*$
     key_groups:
     - age:
-      - *admin_ash
-      - *admin_anbl
-      - *server_xenia
+      - *admin_luxus

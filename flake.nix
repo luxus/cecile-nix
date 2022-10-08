@@ -18,12 +18,12 @@
   outputs = { self, nixpkgs, colmena, impermanence, sops-nix, ... }: {
     nixosConfigurations = {
       xenia = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
+        system = "x86_64-linux";
 
         modules = [
           impermanence.nixosModules.impermanence
           sops-nix.nixosModules.sops
-          ./xenia
+          ./cecile
           { deployment.buildOnTarget = true; }
         ];
 

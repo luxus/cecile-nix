@@ -23,7 +23,7 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = "example@thisismyactual.email";
+      defaults.email = "luxuspur@gmail.com";
       certs."${server_name}" = {
         webroot = "/var/lib/acme/acme-challenge";
         group = "nginx";

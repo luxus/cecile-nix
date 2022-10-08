@@ -34,7 +34,7 @@ in
             disableInviteNotifications = true;
             disableRoomTopicNotifications = true;
             disablePresence = true; # TODO: remove this when https://github.com/matrix-org/dendrite/issues/2752 is fixed
-            adminMxid = "@kity:kity.wtf";
+            adminMxid = "@luxus:furiosa.org";
           };
           channel.namePattern = ":name";
           database = {
