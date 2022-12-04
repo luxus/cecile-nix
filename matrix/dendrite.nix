@@ -2,6 +2,12 @@
 
 let
   server_name = config.services.dendrite.settings.global.server_name;
+
+  database_config = {
+    connection_string = "postgresql:///dendrite?host=/run/postgresql";
+    max_open_conns = 10;
+    max_idle_conns = 5;
+  };
 in
   {
     imports = [
@@ -24,7 +30,7 @@ in
             private_key = "$CREDENTIALS_DIRECTORY/private_key";
 
             # preserve across restarts
-            jetstream.storage_path = "/var/lib/dendrite/jetstream";
+            jetstream.storage_path = "/var/lib/dendrite/";
 
             dns_cache = {
               enabled = true;
@@ -61,15 +67,20 @@ in
 
           client_api.registration_shared_secret = "$REGISTRATION_SHARED_SECRET";
 
-          app_service_api.database.connection_string = "postgresql:///dendrite?host=/run/postgresql";
-          federation_api.database.connection_string = "postgresql:///dendrite?host=/run/postgresql";
-          key_server.database.connection_string = "postgresql:///dendrite?host=/run/postgresql";
-          media_api.database.connection_string = "postgresql:///dendrite?host=/run/postgresql";
-          mscs.database.connection_string = "postgresql:///dendrite?host=/run/postgresql";
-          room_server.database.connection_string = "postgresql:///dendrite?host=/run/postgresql";
-          sync_api.database.connection_string = "postgresql:///dendrite?host=/run/postgresql";
-          user_api.account_database.connection_string = "postgresql:///dendrite?host=/run/postgresql";
-          user_api.device_database.connection_string = "postgresql:///dendrite?host=/run/postgresql";
+          sync_api.search = {
+            enabled = true;
+            index_path = "/var/lib/dendrite/searchindex";
+          };
+
+          app_service_api.database = database_config;
+          federation_api.database = database_config;
+          key_server.database = database_config;
+          media_api.database = database_config;
+          mscs.database = database_config;
+          room_server.database = database_config;
+          sync_api.database = database_config;
+          user_api.account_database = database_config;
+          user_api.device_database = database_config;
         };
       };
 
@@ -133,8 +144,7 @@ in
       ];
 
       persistence."/persistent".directories = [
-        # jetstream
-        "/var/lib/private/dendrite/jetstream"
+        "/var/lib/private/dendrite"
       ];
     };
   }
