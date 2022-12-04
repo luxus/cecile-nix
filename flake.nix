@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:ashkitten/nixpkgs/nyrina";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     colmena = {
       url = "github:zhaofengli/colmena";
@@ -17,7 +17,7 @@
 
   outputs = { self, nixpkgs, colmena, impermanence, sops-nix, ... }: {
     nixosConfigurations = {
-      xenia = nixpkgs.lib.nixosSystem {
+      cecile = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         modules = [
@@ -38,7 +38,7 @@
     } // builtins.mapAttrs (name: value: {
       nixpkgs.system = value.config.nixpkgs.system;
       imports = value._module.args.modules;
-    }) (self.nixosConfigurations);
+    }) self.nixosConfigurations;
 
     devShells."x86_64-linux".default = import ./shell.nix {
       pkgs = nixpkgs.legacyPackages."x86_64-linux";

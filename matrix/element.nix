@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  server_name = config.services.dendrite.settings.global.server_name;
+  inherit (config.services.dendrite.settings.global) server_name;
 in
   {
     services.nginx.virtualHosts."element.${server_name}" = {

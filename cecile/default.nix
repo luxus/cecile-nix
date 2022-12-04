@@ -6,5 +6,5 @@
 
   networking.hostName = "cecile";
   sops.defaultSopsFile = ../secrets/cecile.yaml;
-  services.dendrite.settings.global.server_name = "furiosa.org";
+  services.dendrite.settings.global.server_name = "luxus.ai";
 }

@@ -4,42 +4,19 @@
 {
   imports = [ "${modulesPath}/profiles/qemu-guest.nix" ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "usbhid" ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" ];
   boot.initrd.kernelModules = [ "nvme" ];
-  fileSystems."/" = {
-    device = "/dev/sda1";
-    fsType = "ext4";
+  fileSystems."/" = { device = "/dev/sda1"; fsType = "ext4"; };
+  boot = {
+    loader = {
+      grub = {
+        enable = true;
+        device = "/dev/sda";
+      };
+    };
   };
-  swapDevices = [ ];
 
-  boot.kernelParams = [
-    "nvme.shutdown_timeout=10"
-    "nvme_core.shutdown_timeout=10"
-    "libiscsi.debug_libiscsi_eh=1"
-    "crash_kexec_post_notifiers"
-
-    # VNC console
-    "console=tty1"
-
-    # aarch64-linux
-    "console=ttyAMA0,115200"
-  ];
-
-  boot.loader.efi.canTouchEfiVariables = false;
-  boot.loader.grub = {
-    version = 2;
-    device = "/dev/sda";
-    splashImage = null;
-    extraConfig = ''
-      serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
-      terminal_input --append serial
-      terminal_output --append serial
-    '';
-    efiInstallAsRemovable = true;
-    efiSupport = true;
-  };
+  nixpkgs.hostPlatform.system = "x86_64-linux";
 
   # https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/configuringntpservice.htm#Configuring_the_Oracle_Cloud_Infrastructure_NTP_Service_for_an_Instance
 #  networking.timeServers = [ "169.254.169.254" ];
@@ -51,5 +28,4 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s3.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

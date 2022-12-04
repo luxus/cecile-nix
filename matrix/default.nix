@@ -1,10 +1,10 @@
 {
   imports = [
-    ./appservice-discord.nix
+    # ./appservice-discord.nix
     ./cinny.nix
     ./coturn.nix
     ./dendrite.nix
     ./element.nix
-    ./media-repo.nix
+    # ./media-repo.nix
   ];
 }

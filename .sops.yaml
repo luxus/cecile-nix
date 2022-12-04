@@ -1,7 +1,12 @@
 keys:
-  - &admin_luxus age1ncepfcrzfep624tpanhqfflafznh7ftuqffv0nfq24jhv3dwx40sltjkad
+  # Users
+  - &users:
+    - &luxus age1ncepfcrzfep624tpanhqfflafznh7ftuqffv0nfq24jhv3dwx40sltjkad
+  # Hosts
+  - &hosts:
+    - &cecile age1ncepfcrzfep624tpanhqfflafznh7ftuqffv0nfq24jhv3dwx40sltjkad
 creation_rules:
-  - path_regex: secrets/.*$
+  - path_regex: secrets/cecile.ya?ml$
     key_groups:
     - age:
-      - *admin_luxus
+      - *luxus

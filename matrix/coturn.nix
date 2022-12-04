@@ -2,7 +2,7 @@
 { config, lib, ... }:
 
 let
-  server_name = config.services.dendrite.settings.global.server_name;
+  inherit (config.services.dendrite.settings.global) server_name;
 in
   {
     services = {
@@ -19,7 +19,7 @@ in
         pkey = "${config.security.acme.certs.${realm}.directory}/key.pem";
         extraConfig = ''
           # TODO: make this configurable per machine or auto-discover
-          external-ip=129.153.55.114/10.0.0.85
+          external-ip=141.95.53.184
           # makes the voip tester happy
           # technically not spec compliant behavior?
           # idk why coturn works without this on another machine with public ipv4 assigned directly
