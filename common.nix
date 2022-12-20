@@ -10,8 +10,8 @@ in {
   ];
 
   services.openssh.enable = true;
+  programs.mosh.enable = true;
   security.sudo.wheelNeedsPassword = false;
-
   users.users.luxus = {
     isNormalUser = true;
     shell = pkgs.zsh;

@@ -5,6 +5,7 @@
     ./coturn.nix
     ./dendrite.nix
     ./element.nix
+    ./services.nix
     # ./media-repo.nix
   ];
 }
